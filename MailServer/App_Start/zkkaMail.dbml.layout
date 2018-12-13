@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="zkkaMail">
+  <DataContextMoniker Name="/zkkaMailDataContext" />
+  <nestedChildShapes>
+    <classShape Id="fad60e0d-dc83-4d7f-99e8-cc9f8efc997a" absoluteBounds="3.125, 4.375, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/zkkaMailDataContext/ctTbl" />
+      <nestedChildShapes>
+        <elementListCompartment Id="b711987a-d392-4b25-aa1a-ef41ae9f40b9" absoluteBounds="3.1399999999999997, 4.835, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="a9810f57-981c-4fd0-997a-65b2cea1bdc8" absoluteBounds="5.5, 4.375, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/zkkaMailDataContext/Login" />
+      <nestedChildShapes>
+        <elementListCompartment Id="e0ecd2d1-b48f-468b-976d-f9f0f7b2ffe3" absoluteBounds="5.515, 4.835, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="e6c1a795-f2e1-467a-8572-0dcc99c269b7" absoluteBounds="0.875, 4.5, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/zkkaMailDataContext/MailBesked" />
+      <nestedChildShapes>
+        <elementListCompartment Id="d8b25e71-b678-47ef-8494-42ab403c9096" absoluteBounds="0.89000000000000012, 4.96, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

@@ -1,0 +1,281 @@
+﻿body {
+    background-image: url('../Pictures/maillll.png');
+    background-repeat: repeat;
+    /*
+    background-color: #cccccc;*/
+}
+
+
+#container {   
+    width: 800px;
+    border: 3px solid #d3c6c6;
+    margin: auto;   
+    background-color: white;
+}
+
+#header {
+
+    background-color: cornflowerblue;
+    text-align: center;
+}
+
+#DropDownList1 {
+    position: absolute;
+    top: 20px;
+    margin-left: 70px;
+    background-color: cornflowerblue;
+    color: #CC3300;
+    border: none;
+    font-size: medium;
+}
+
+#sprog {
+    position: absolute;
+    top: 10px;
+    margin-left: 20px;
+    font-size: medium;
+    color: #CC3300;
+}
+
+.txtBoxes{  /* textboxes for sending mails*/
+    margin-top: 30px;
+}
+
+#TextBox3, #TextBox2, #TextBox4 { /* textboxes for sending mails*/
+    margin-bottom: 10px;
+    border: 2px solid #456879;
+    border-radius: 10px;
+    height: 22px;
+    width: 530px;
+    margin-left: 250px;
+    text-align: center;
+}
+
+.infoMail {  /* those Labels near textboxes: "afsender" etc */
+    position: absolute;
+    top: 95px;
+    margin-left: 70px;
+    font-size: medium;
+    color: #CC3300;
+    margin-top: -15px;
+    font-size:large;
+}
+
+#TextArea1 {
+    position: absolute;
+    top: 340px;
+    min-height: 250px;
+    width: 530px;
+    border: 2px solid #456879;
+    border-radius: 10px;
+    margin-left: 250px;
+}
+
+
+#singleMailInfo { /* label for textarea "Text"*/
+    position: absolute;
+    top: 320px;
+    margin-left: 70px;
+    font-size: medium;
+    color: #CC3300;
+    font-size: large;
+}
+
+#Image2 {
+    position: absolute;
+    top: 355px;
+    margin-left: 35px;
+}
+
+.xml {
+    position: absolute;
+    top: 564px;
+    margin-left: 70px;
+    font-size: medium;
+    color: #CC3300;
+    font-size: large;
+}
+
+#CheckBox1 {
+    position: absolute;
+    top: 583px;
+    margin-left: 120px;
+}
+
+#Button1 { /*Send Mail button*/
+    position: absolute;
+    top: 537px;
+    margin-left: 60px;
+    background: #4cbd1d;
+    padding: 10px;
+    border-radius: 50px;
+    display: inline-block;
+    border: none;
+    color: white;
+    cursor: pointer;
+    
+}
+
+
+
+#CheckBox1:hover {
+    background-color: cornflowerblue;
+    color: #e1c5c5;        
+}
+
+.horizontalLine {
+    background-color: cornflowerblue;
+    text-align: center;
+    color: #eff814;
+}
+
+#TextBox7 { /*login*/
+    position: absolute;
+    top: 810px;
+    margin-bottom: 10px;
+    border: 2px solid #456879;
+    border-radius: 10px;
+    height: 22px;
+    width: 265px;
+    margin-left: 40px;
+}
+#TextBox10 { /*login*/
+    position: absolute;
+    top: 850px;
+    margin-bottom: 10px;
+    border: 2px solid #456879;
+    border-radius: 10px;
+    height: 22px;
+    width: 265px;
+    margin-left: 70px;
+}
+#TextBox8 { /*login*/
+    position: absolute;
+    top: 810px;
+    margin-bottom: 10px;
+    border: 2px solid #456879;
+    border-radius: 10px;
+    height: 22px;
+    width: 265px;
+    margin-left: 315px;
+}
+
+#Button4 { /* login knap*/
+    position: absolute;
+    top: 810px;
+    margin-left: 600px;
+    background: #4cbd1d;
+    padding: 8px;
+    border-radius: 50px;
+    display: inline-block;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+
+
+#TextBox5 { /*create users*/
+    position: absolute;
+    top: 970px;
+    margin-bottom: 10px;
+    border: 2px solid #456879;
+    border-radius: 10px;
+    height: 22px;
+    width: 265px;
+    margin-left: 250px;
+    text-align: center;
+}
+#TextBox6 { /*create users*/
+    position: absolute;
+    top: 1005px;
+
+    margin-bottom: 10px;
+    border: 2px solid #456879;
+    border-radius: 10px;
+    height: 22px;
+    width: 265px;
+    margin-left: 250px;
+    text-align: center;
+}
+
+#TextBox9 {
+    position: absolute;
+    top: 1040px;
+    margin-bottom: 10px;
+    border: 2px solid #456879;
+    border-radius: 10px;
+    height: 22px;
+    width: 265px;
+    margin-left: 250px;
+    text-align: center;
+}
+
+#Button3 { /*create button*/
+    position: absolute;
+    top: 1080px;
+    margin-left: 350px;
+    background: #4cbd1d;
+    padding: 8px;
+    border-radius: 50px;
+    display: inline-block;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+#OpretTekst{ /* label for "Create A User*/
+    position: absolute;
+    top: 940px;
+    margin-left: 340px;
+}
+
+#lblChatServerMessages { /* label for ChatServer Error messages*/
+    position: absolute;
+    top: 900px;
+    margin-left: 400px;
+    color: red;
+    text-align: center;
+}
+
+#lblSuccesChatServer { /* label for ChatServer Success messages*/
+    position: absolute;
+    top: 900px;
+    margin-left: 400px;
+    color: #6f9def;
+    text-align: center;
+}
+
+#lblMailServer { /* label for mail Server Error messages*/
+    position: absolute;
+    top: 650px;
+    margin-left: 350px;
+    color: red;
+    text-align: center;
+}
+#lblSprog {
+    position: absolute;
+    top: 20px;
+    margin-left: 150px;
+    color: red;
+    text-align: center;
+}
+#Button5 { /* login knap*/
+    position: absolute;
+    top: 810px;
+    margin-left: 688px;
+    background: #4cbd1d;
+    padding: 8px;
+    border-radius: 50px;
+    display: inline-block;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+#GridView1{
+    margin-left: 120px;
+}
+#ImageButton1{
+    margin-left: 330px;
+}
