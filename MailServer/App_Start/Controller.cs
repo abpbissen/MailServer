@@ -47,10 +47,10 @@ namespace MailServer.App_Start
             //Mail info til xml og krypteret
             if (cb)
             {
-                var filename = "MailFile.xml";
-                var filenameCrypt = "MailFileCrypt.xml";
-                var MailFilePath = Path.Combine(@"C:\Users\Administrator\Desktop\Projects\MailServer\MailServer\App_Data", filename);
-                var MailFilePathCrypt = Path.Combine(@"C:\Users\Administrator\Desktop\Projects\MailServer\MailServer\App_Data", filenameCrypt);
+                
+                string MailFilePath = Path.Combine(HttpRuntime.AppDomainAppPath, "App_Data/MailFile.xml");
+                string MailFilePathCrypt = Path.Combine(HttpRuntime.AppDomainAppPath, "App_Data/MailFileCrypt.xml");
+                
                 XElement newElement = new XElement("Message",
                 new XElement("Mail_Body", mailbody));
                 IEnumerable<XElement> LinqMail = from x in newElement.Descendants() select x;
@@ -61,8 +61,7 @@ namespace MailServer.App_Start
                     
                     //Krypterer strengen til array af bytes
                     byte[] encrypted = EncryptStringToBytes(mailbody, myRijndael.Key, myRijndael.IV);
-                    XElement newElementCrypt = new XElement("Message",
-                    new XElement("Mail_Body", BitConverter.ToString(encrypted).Replace("-", "")));
+                    XElement newElementCrypt = new XElement("Message", new XElement("Mail_Body", BitConverter.ToString(encrypted).Replace("-", "")));
                     IEnumerable<XElement> MailCryptIEnum = from x in newElementCrypt.Descendants().ToList() select x;
                     newElementCrypt.Save(MailFilePathCrypt);
                 }

@@ -26,7 +26,7 @@ namespace MailServer
         Controller c = new Controller();
         LoginResult r = new LoginResult();
         public readonly string guidStr = Guid.NewGuid().ToString();
-
+        
         protected void Page_Load(object sender, EventArgs e)
         {
             c.LangChoice(DropDownList1.SelectedValue);
