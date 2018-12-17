@@ -9,8 +9,9 @@
 #container {   
     width: 800px;
     border: 3px solid #d3c6c6;
-    margin: auto;   
+    margin: 0 auto;   
     background-color: white;
+    min-height: 500px;
 }
 
 #header {
@@ -162,7 +163,7 @@
 
 #Button4 { /* login knap*/
     position: absolute;
-    top: 810px;
+    top: 810px;  
     margin-left: 600px;
     background: #4cbd1d;
     padding: 8px;
@@ -173,6 +174,18 @@
     cursor: pointer;
 }
 
+#Button5 { /* login knap*/
+    position: absolute;
+    top: 810px;   
+    margin-left: 688px;
+    background: #4cbd1d;
+    padding: 8px;
+    border-radius: 50px;
+    display: inline-block;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
 
 
 #TextBox5 { /*create users*/
@@ -260,22 +273,70 @@
     color: red;
     text-align: center;
 }
-#Button5 { /* login knap*/
+
+
+#GridView1 {
+    margin-left: 120px;
+
+    /*
+        table-layout: fixed;
+    width: 620px;
+    overflow: hidden;
+    
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    */
+}
+#ImageButton1{
+    margin-left: 330px;
+}
+
+/*    Mail bruger design     */
+
+#chatBox {
     position: absolute;
-    top: 810px;
-    margin-left: 688px;
+    top: 390px;
+    border: 3px double #CCCCCC;
+    width: 350px;
+    height: 80px;
+    background-color: #f1eeee;
+    color: #6f9def;
+    margin-left: 120px;
+}
+
+#ButtonChat {
+    position: absolute;
+    top: 394px;
+    margin-left: 490px;
     background: #4cbd1d;
-    padding: 8px;
-    border-radius: 50px;
+    padding: 10px;
     display: inline-block;
     border: none;
     color: white;
     cursor: pointer;
+    height: 80px;
+    margin-top: 0px;
 }
 
-#GridView1{
-    margin-left: 120px;
+#lblChatBoxHilsen {
+    position: absolute;
+    top: 12px;
+    margin-left: 150px;
+    color: black;
+    text-align: center;
 }
-#ImageButton1{
-    margin-left: 330px;
+/*
+.GridViewChat { /* div tag for en gridview
+    position: absolute;
+    width: 800px;
+    overflow: auto
+}
+*/
+
+.left {
+    float: left;
+}
+.right {
+    float: right;
 }

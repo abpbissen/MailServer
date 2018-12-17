@@ -16,28 +16,23 @@ using System.Xml;
 using System.Threading;
 using System.Diagnostics;
 using System.Diagnostics.Tracing;
+using System.Reflection;
 
 namespace MailServer
 {
+
     public partial class _Default : Page
     {
         //Objekter
         zkkaMailDataContext m = new zkkaMailDataContext();
         Controller c = new Controller();
         LoginResult r = new LoginResult();
-        public readonly string guidStr = Guid.NewGuid().ToString();
-        
+
         protected void Page_Load(object sender, EventArgs e)
         {
+
             c.LangChoice(DropDownList1.SelectedValue);
-            if (Session["WebMail"] != null)
-            {
-                ImageButton1.Visible = true;
-            }
-            else
-            {
-                ImageButton1.Visible = false;
-            }
+            ImageButton1.Visible = Session["WebMail"] != null ? true : false;
             lblSprog.Text = Thread.CurrentThread.CurrentUICulture.ToString();
         }
         protected async void Button1_Click(object sender, EventArgs e)
@@ -45,14 +40,14 @@ namespace MailServer
             //As long as password is not empty, send mail info through the controller.
             if (TextBox2.Text != "")
             {
-                await Task.Run(() => c.Mailorder(TextBox3.Text, TextBox2.Text, TextBox4.Text, "Mail besked", TextArea1.InnerText, guidStr, CheckBox1.Checked));
-                c.EntityMail(TextBox3.Text,TextBox4.Text, TextArea1.InnerText);
+                await Task.Run(() => c.Mailorder(TextBox3.Text, TextBox2.Text, TextBox4.Text, "Mail besked", TextArea1.InnerText, Label1, CheckBox1.Checked));
+                c.EntityMail(TextBox3.Text, TextBox4.Text, TextArea1.InnerText);
                 c.TraceOut("Mail message: " + TextArea1.InnerText);
                 TextArea1.InnerText = "";
             }
             else
             {
-                lblMailServer.Text = ("!!! Mail cannot be found or not exist!");
+                lblMailServer.Text = "!!! Mail cannot be found or not exist!";
             }
         }
 
@@ -70,12 +65,12 @@ namespace MailServer
         }
         protected void Button4_Click(object sender, EventArgs e)
         {
-            
+
             r = c.LoginGruppe(TextBox7.Text, TextBox8.Text);
             if (r.Mode)
             {
                 lblSuccesChatServer.Text = ("success");
-                Response.Redirect("/MailBruger.aspx?WebNavn=" + Session["WebNavn"]+ "&WebMail=" + Session["WebMail"]);
+                Response.Redirect("/MailBruger.aspx?WebNavn=" + Session["WebNavn"] + "&WebMail=" + Session["WebMail"]);
             }
             else
             {
@@ -99,12 +94,15 @@ namespace MailServer
             {
                 lblSuccesChatServer.Text = ("success");
                 Response.Redirect("/default.aspx?WebNavn=" + Session["WebNavn"] + "&WebMail=" + Session["WebMail"]);
-            
+
             }
             else
             {
                 lblChatServerMessages.Text = ("error");
             }
         }
+
+
     }
 }
+

@@ -9,6 +9,14 @@
         .auto-style1 {
             margin-right: 0px;
         }
+        .auto-style2 {
+            right: 454px;
+            top: 814px;
+        }
+        .auto-style3 {
+            left: 478px;
+            top: 812px;
+        }
     </style>
 </head>
 <body>    
@@ -44,10 +52,13 @@
                 <p>Text</p>
             </div>
 
-            <div class="left"> <!-- left 2 start -->
+            
+                               
+           
+                
                 <br /><br />
                 <asp:Image ID="Image2" runat="server" Height="86px" ImageUrl="~/Pictures/Logo.png" Width="152px" />
-            </div> <!-- left 2 end -->
+            
             <br /><br /><br /><br /><br /><br /><br />
 
             
@@ -101,8 +112,8 @@
                 <asp:TextBox ID="TextBox8" runat="server" TextMode="Password" placeholder="Password"></asp:TextBox>
                         <br />
                 <br />
-                <asp:Button ID="Button5" runat="server" OnClick="Button5_Click" Text="Mail login" CausesValidation="False" UseSubmitBehavior="False" ValidateRequestMode="Disabled" />
-                
+                <asp:Button ID="Button5" runat="server" OnClick="Button5_Click" Text="Mail login" />
+                <asp:Button ID="Button4" runat="server" OnClick="Button4_Click" Text="Chat Login" />
                   
                
             
@@ -127,15 +138,8 @@
                 <br />
                 <br /> <br />
                 <br />
-            <br />
-                <br />
-                <br />
-            <br />
-                <br />
-                <br />
-
+            
                                 <br /><br />
-                <asp:Button ID="Button4" runat="server" OnClick="Button4_Click" Text="Chat Login" />
                 
                 <br />
                 <br />
@@ -151,7 +155,9 @@
                 <asp:Button ID="Button3" runat="server" OnClick="Button3_Click" Text="Create" />
               
 
-                <asp:GridView ID="GridView1" runat="server">
+                <asp:GridView ID="GridView1" runat="server" BorderColor="DarkRed" BorderStyle="Double" BorderWidth="3px" CellPadding="4">
+                    <HeaderStyle BackColor="DarkRed" ForeColor="White" Font-Bold="true" />
+                    <FooterStyle BackColor="DarkRed" ForeColor="White" Font-Bold="false" />
                 </asp:GridView>
                 <br />
                 <br />

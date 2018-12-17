@@ -20,10 +20,12 @@ namespace MailServer
         zkkaMailDataContext m = new zkkaMailDataContext();
         Controller c = new Controller();
         string WNStr;
+        
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
             {
+                Button2.Visible = false;
                 GridView2.Visible = false;
                 if (WebNavn() != null)
                 {   //Nested
@@ -38,9 +40,14 @@ namespace MailServer
                 {
                     Response.Redirect("/default");
                 }
-                Response.Write("Test if exit: " + (string)Session["WebMail"]);
+                lblChatBoxHilsen.Text = ("your e-mail address: " + (string)Session["WebMail"]);
+                //GridView1.Columns[2].ItemStyle.Width = Unit.Pixel(100);
+                //GridView1.RowStyle.Width = Unit.Pixel(10);
+               
             }
         }
+
+   
         protected async void Timer1_Tick(object sender, EventArgs e)
         {
             //Lambda expression i stedet for method group, da der er parametre
@@ -48,9 +55,10 @@ namespace MailServer
             //await Task.Run(() => c.ShowMsg(GridView1, (string)Session["WebMail"]));
         }
 
-        protected async void Button1_Click(object sender, EventArgs e)
+        protected async void Button1_Click(object sender, EventArgs e)  //chat button
         {
-            await Task.Run(() => c.EntityctTbl(TextBox2.Text, WebNavn(), (string)Session["WebMail"]));
+            await Task.Run(() => c.EntityctTbl(chatBox.Text, WebNavn(), (string)Session["WebMail"]));
+            chatBox.Text = ""; // clear text after button click or enter
         }
         protected void Button2_Click(object sender, EventArgs e)
         {
@@ -75,8 +83,18 @@ namespace MailServer
             //sørger for at gridview ikke hopper ud af formen
         }
 
-
-
- 
+        //metoden der begrænser antal character på gridview
+        protected void GridViewLimit(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                ViewState["Besked"] = e.Row.Cells[2].Text;
+                if (e.Row.Cells[2].Text.Length >= 10)
+                {
+                    e.Row.Cells[2].Text = e.Row.Cells[2].Text.Substring(0, 10) + "...";
+                    e.Row.Cells[2].ToolTip = ViewState["Besked"].ToString();
+                }
+            }
+        }
     }
 }
