@@ -31,8 +31,7 @@ namespace MailServer.App_Start
     //Main
     public class Controller : Page
     {
-        //Krypteret kode og mail
-        public string strPassword = "";
+        //Streng til mail kryptering
         public string strMail = "";
         // Matematisk udregning af kryptering
         public string strPermutation = "";
@@ -83,30 +82,7 @@ namespace MailServer.App_Start
             }
       
 
-        public LoginResult LoginGruppe(string Name, string Password)
-        {
-            LoginResult r = new LoginResult();
-            strPassword = Encrypt(Password);
-            var logonBruger =
-            (from x in db.Logins where x.Name == Name && x.Password == strPassword select x).FirstOrDefault();
-            if (logonBruger != null && logonBruger.Name != "")
-            {
-                Session["WebNavn"] = logonBruger.Name;
-                Session["WebMail"] = logonBruger.Mail;
-                r.Mode = true;
-                r.LoginUser = logonBruger.Password;
-                r.LoginId = logonBruger.Id;
-            }
-            else
-            {
-                Session["WebNavn"] = "";
-                Session["WebMail"] = "";
-                r.Mode = false;
-                r.LoginUser = "";
-                r.LoginId = 0;
-            }
-            return r;
-        }
+
         public ctTbl EntityctTbl(string besked, string navn, string email)
         {
             //Table<TEntity> oprettes
@@ -142,9 +118,10 @@ namespace MailServer.App_Start
             }
             return insertMail;
         }
-        public Login EntityLogin(string navn, string kode, string mail)
+        public Login EntityLogin(string name, string password, string mail)
         {
-            Login insertLogin = new Login { Name = navn, Password = kode, Mail = mail };
+          
+            Login insertLogin = new Login { Name = name, Password = Encrypt(password), Mail = mail };
             db.Logins.InsertOnSubmit(insertLogin);
             try
             {
@@ -155,6 +132,30 @@ namespace MailServer.App_Start
                 db.SubmitChanges();
             }
             return insertLogin;
+        }
+        public LoginResult LoginGruppe(string Name, string password)
+        {
+            LoginResult r = new LoginResult();
+  
+            var logonBruger =
+            (from x in db.Logins where x.Name == Name && x.Password == Encrypt(password) select x).FirstOrDefault();
+            if (logonBruger != null && logonBruger.Name != "")
+            {
+                Session["WebNavn"] = logonBruger.Name;
+                Session["WebMail"] = logonBruger.Mail;
+                r.Mode = true;
+                r.LoginUser = logonBruger.Password;
+                r.LoginId = logonBruger.Id;
+            }
+            else
+            {
+                Session["WebNavn"] = "";
+                Session["WebMail"] = "";
+                r.Mode = false;
+                r.LoginUser = "";
+                r.LoginId = 0;
+            }
+            return r;
         }
         public bool SqlGV(GridView gv)
         {
