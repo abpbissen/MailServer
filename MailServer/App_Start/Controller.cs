@@ -186,10 +186,9 @@ namespace MailServer.App_Start
            
             gv.DataBind();
         }
-        public void ShowMsg(GridView gv, string mail)
+        public void ShowMsg(GridView gv)
         {
             gv.DataSource = (from x in db.MailBeskeds orderby x.Id descending select new { x.Id, x.Fra, x.Besked }).Take(10);
-            //gv.DataSource = (from x in db.MailBeskeds where x.BrugerMail == mail select x);
             gv.DataBind();
         }
 

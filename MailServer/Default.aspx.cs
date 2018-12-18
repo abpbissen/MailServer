@@ -101,7 +101,7 @@ namespace MailServer
         //Vis mail icon, til at se mail inbox
         protected void ImageButton1_Click(object sender, ImageClickEventArgs e)
         {
-            c.ShowMsg(GridView1, (string)Session["WebMail"]);
+            c.ShowMsg(GridView1);
         }
         public override void VerifyRenderingInServerForm(Control control)
         {
