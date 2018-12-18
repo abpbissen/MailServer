@@ -9,15 +9,7 @@
         .auto-style1 {
             margin-right: 0px;
         }
-        .auto-style2 {
-            right: 454px;
-            top: 814px;
-        }
-        .auto-style3 {
-            left: 478px;
-            top: 812px;
-        }
-    </style>
+        </style>
 </head>
 <body>    
     <form id="form1" runat="server">
@@ -57,7 +49,6 @@
            
                 
                 <br /><br />
-                <asp:Image ID="Image2" runat="server" Height="86px" ImageUrl="~/Pictures/Logo.png" Width="152px" />
             
             <br /><br /><br /><br /><br /><br /><br />
 
@@ -99,7 +90,7 @@
            
 
             <div class="horizontalLine">
-                <p>Welcome to Chat Server</p>
+                <p>Login or create user</p>
             </div>
                 
                   

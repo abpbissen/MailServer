@@ -26,7 +26,7 @@ namespace MailServer
             if (!Page.IsPostBack)
             {
                 Button2.Visible = false;
-                GridView2.Visible = false;
+                //Efter string metoden er igangsat en enkelt gang, kan ref string bruges i stedet
                 if (WebNavn() != null)
                 {   //Nested
                     if (WNStr == "Admin")
@@ -41,46 +41,32 @@ namespace MailServer
                     Response.Redirect("/default");
                 }
                 lblChatBoxHilsen.Text = ("your e-mail address: " + (string)Session["WebMail"]);
-                //GridView1.Columns[2].ItemStyle.Width = Unit.Pixel(100);
-                //GridView1.RowStyle.Width = Unit.Pixel(10);
                
             }
         }
-
-   
+        //Timer bruges til at opdatere gridview, som bruges til chat interface
         protected async void Timer1_Tick(object sender, EventArgs e)
         {
             //Lambda expression i stedet for method group, da der er parametre
             await Task.Run(() => c.SqlGV(GridView1));
-            //await Task.Run(() => c.ShowMsg(GridView1, (string)Session["WebMail"]));
         }
 
         protected async void Button1_Click(object sender, EventArgs e)  //chat button
         {
             await Task.Run(() => c.EntityctTbl(chatBox.Text, WebNavn(), (string)Session["WebMail"]));
-            chatBox.Text = ""; // clear text after button click or enter
+            chatBox.Text = ""; // Gør tekstfelt tom 
         }
+        //Delete button, kun synlig hvis der logges ind som Admin
         protected void Button2_Click(object sender, EventArgs e)
         {
-            c.LinqDelete();
+            c.EntityDelete();
         }
-        protected void ImageButton1_Click(object sender, ImageClickEventArgs e)
-        {
-    
-
-        }
+        //ref string til navn session, da denne bruges mange gange
         public ref string WebNavn()
         {
             //Cast er bedre end tostring(), fordi cast kan vise variabel type
             WNStr = (string)Session["WebNavn"];
             return ref WNStr;
-        }
-
-
-
-        public override void VerifyRenderingInServerForm(Control control)
-        {
-            //sørger for at gridview ikke hopper ud af formen
         }
 
         //metoden der begrænser antal character på gridview
@@ -95,6 +81,10 @@ namespace MailServer
                     e.Row.Cells[2].ToolTip = ViewState["Besked"].ToString();
                 }
             }
+        }
+        public override void VerifyRenderingInServerForm(Control control)
+        {
+            //sørger for at gridview ikke hopper ud af formen
         }
     }
 }

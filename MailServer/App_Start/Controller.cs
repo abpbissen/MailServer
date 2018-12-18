@@ -40,6 +40,7 @@ namespace MailServer.App_Start
         public const int bytePermutation3 = 0x17;
         public const int bytePermutation4 = 0x41;
 
+        //Instantiering af Linq to sql objekt
         zkkaMailDataContext db = new zkkaMailDataContext();
         public string errStr = "";
         //public int logonBruger;
@@ -60,10 +61,11 @@ namespace MailServer.App_Start
                 }
                 if (cb)
                 {
-
+                    //HttpRuntime klassen bruges til at finde xml fil, uden brug af systemets stifinder(C:\)
                     string MailFilePath = Path.Combine(HttpRuntime.AppDomainAppPath, "App_Data/MailFile.xml");
                     string MailFilePathCrypt = Path.Combine(HttpRuntime.AppDomainAppPath, "App_Data/MailFileCrypt.xml");
 
+                    //Linq to xml
                     XElement newElement = new XElement("Message",
                     new XElement("Mail_Body", mailbody));
                     IEnumerable<XElement> LinqMail = from x in newElement.Descendants() select x;
@@ -77,12 +79,12 @@ namespace MailServer.App_Start
             }
             catch (SmtpException)
                 {
-                    errLbl.Text = ("Incorrect Password!");
+                    errLbl.Text = "Incorrect Password!";
                 }
             }
       
 
-
+        //Linq metoder(7), Metoder som kan slette/tilføje er navngivet med "Entity"
         public ctTbl EntityctTbl(string besked, string navn, string email)
         {
             //Table<TEntity> oprettes
@@ -96,7 +98,7 @@ namespace MailServer.App_Start
             }
             catch (Exception)
             {
-                //prøv igen
+                //prøver igen
                 db.SubmitChanges();
             }
             return insertTbl;
@@ -119,8 +121,7 @@ namespace MailServer.App_Start
             return insertMail;
         }
         public Login EntityLogin(string name, string password, string mail)
-        {
-          
+        {  
             Login insertLogin = new Login { Name = name, Password = Encrypt(password), Mail = mail };
             db.Logins.InsertOnSubmit(insertLogin);
             try
@@ -133,6 +134,28 @@ namespace MailServer.App_Start
             }
             return insertLogin;
         }
+        public void EntityDelete()
+        {
+            var delTable =
+            from x in db.ctTbls
+            where x.ChatNr >= 1
+            select x;
+
+            foreach (var d in delTable)
+            {
+                db.ctTbls.DeleteOnSubmit(d);
+            }
+
+            try
+            {
+                db.SubmitChanges();
+            }
+            catch (Exception e)
+            {
+                Response.Write(e);
+            }
+        }
+        //Constructor af LoginResult klassen
         public LoginResult LoginGruppe(string Name, string password)
         {
             LoginResult r = new LoginResult();
@@ -157,64 +180,44 @@ namespace MailServer.App_Start
             }
             return r;
         }
-        public bool SqlGV(GridView gv)
+        public void SqlGV(GridView gv)
         {
-            gv.DataSource = (from chat in db.ctTbls orderby chat.ChatNr descending select chat).Take(10);
+            gv.DataSource = (from x in db.ctTbls orderby x.ChatNr descending select new { x.ChatNr, x.Navn, x.Besked }).Take(10);
+           
             gv.DataBind();
-            return true;
         }
-        public bool ShowMsg(GridView gv, string mail)
+        public void ShowMsg(GridView gv, string mail)
         {
-            gv.DataSource = (from x in db.MailBeskeds where x.BrugerMail == mail select x);
+            gv.DataSource = (from x in db.MailBeskeds orderby x.Id descending select new { x.Id, x.Fra, x.Besked }).Take(10);
+            //gv.DataSource = (from x in db.MailBeskeds where x.BrugerMail == mail select x);
             gv.DataBind();
-            return true;
-        }
-        public void LinqDelete()
-        {
-            var delTable =
-            from x in db.ctTbls
-            where x.ChatNr >= 1
-            select x;
-
-            foreach (var d in delTable)
-            {
-                db.ctTbls.DeleteOnSubmit(d);
-            }
-
-            try
-            {
-                db.SubmitChanges();
-            }
-            catch (Exception e)
-            {
-                Response.Write(e);
-            }
         }
 
+        //string metode til sprogvalg
         public string LangChoice(string sprog)
         {
             Thread.CurrentThread.CurrentUICulture = new CultureInfo(WebConfigurationManager.AppSettings[sprog]);
             return sprog;
         }
+        //Brug af Trace klassen til at se historik af mailbeskeder
         public string TraceOut(string outStr)
         {
-            System.Diagnostics.Trace.Listeners.Add(new TextWriterTraceListener("MailLog.log", "myListener"));
+            System.Diagnostics.Trace.Listeners.Add(new TextWriterTraceListener("MailOutput.log", "myListener"));
             System.Diagnostics.Trace.TraceInformation(outStr);
             System.Diagnostics.Trace.Flush();
             return outStr;
         }
+        //Krypteringsmetoder(4): Kryptering, dekryptering, Kryptering af bytes og dekryptering af bytes
         public string Encrypt(string strData)
         {
-            return Convert.ToBase64String(Encrypt(Encoding.UTF8.GetBytes(strData)));
+            return Convert.ToBase64String(ByteEncrypt(Encoding.UTF8.GetBytes(strData)));
         }
-
-
         public string Decrypt(string strData)
         {
-            return Encoding.UTF8.GetString(Decrypt(Convert.FromBase64String(strData)));
+            return Encoding.UTF8.GetString(ByteDecrypt(Convert.FromBase64String(strData)));
         }
 
-        public byte[] Encrypt(byte[] strData)
+        public byte[] ByteEncrypt(byte[] strData)
         {
             PasswordDeriveBytes passbytes =
             new PasswordDeriveBytes(strPermutation,
@@ -235,9 +238,7 @@ namespace MailServer.App_Start
             cryptostream.Close();
             return memstream.ToArray();
         }
-
-        // decrypt
-        public byte[] Decrypt(byte[] strData)
+        public byte[] ByteDecrypt(byte[] strData)
         {
             PasswordDeriveBytes passbytes =
             new PasswordDeriveBytes(strPermutation,
