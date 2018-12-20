@@ -24,6 +24,7 @@ namespace MailServer.App_Start
 {
     public class LoginResult
     {
+        //Auto properties
         public bool Mode { get; set; }
         public string LoginUser { get; set; }
         public int LoginId { get; set; }
